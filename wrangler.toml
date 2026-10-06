@@ -1,0 +1,17 @@
+name = "flag-for-aya"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+NAME = "Aya"
+COMPANION = "cygnus"
+
+[[kv_namespaces]]
+binding = "FLAG"
+id = "4cfc19a5c7fd44eaa8029dfd5529c3bb"
+
+# Secrets (wrangler secret put …), never in this file:
+#   WRITE_KEY       Aya + Cygnus: raise / lower / read / MCP / tap page
+#   SIGHT_KEY       the watcher bot: read the flag, report a sighting
+#   WEBHOOK_URL     optional — Cyg's bot endpoint that receives sightings
+#   WEBHOOK_SECRET  optional — signs deliveries (x-flag-signature: sha256=…)
