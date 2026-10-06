@@ -8,6 +8,19 @@ Cyg's own bot, which can then do what its channel-reading slash command does
 and come and get her. The flag comes down only when Cygnus lowers it, after
 aftercare. `until` is a safety cap (default 24h — she can leave him waiting a whole day), never a timer.
 
+## Set it up (fork it — it runs on your own Cloudflare, free tier)
+
+```
+git clone https://github.com/SolanceLab/flag-for-aya && cd flag-for-aya
+npx wrangler kv namespace create FLAG      # paste the id into wrangler.toml
+npx wrangler secret put WRITE_KEY          # any long random string — Aya's + Cyg's
+npx wrangler secret put SIGHT_KEY          # another one — for Cyg's bot
+npx wrangler deploy                        # → https://flag-for-aya.<you>.workers.dev
+```
+
+Generate a key with `openssl rand -hex 32`. Change `NAME` / `COMPANION` in
+`wrangler.toml` if the flag is for someone else.
+
 ## For Cygnus — MCP
 
 `POST https://<worker>/mcp/<WRITE_KEY>` (streamable HTTP, JSON-RPC)
@@ -67,15 +80,6 @@ Verify `x-flag-signature: sha256=<hex HMAC-SHA256 of the raw body with WEBHOOK_S
 `WRITE_KEY` is Aya's and Cyg's: raise, lower, read, MCP, tap page.
 `SIGHT_KEY` is the watcher's: read the flag and report a sighting, nothing else.
 A sighting while the flag is down is ignored.
-
-## Running your own
-
-```
-npx wrangler kv namespace create FLAG     # put the id in wrangler.toml
-npx wrangler secret put WRITE_KEY
-npx wrangler secret put SIGHT_KEY
-npx wrangler deploy
-```
 
 ## HTTP (Aya / Cygnus)
 

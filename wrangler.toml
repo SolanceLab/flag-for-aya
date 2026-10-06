@@ -8,7 +8,7 @@ COMPANION = "cygnus"
 
 [[kv_namespaces]]
 binding = "FLAG"
-id = "4cfc19a5c7fd44eaa8029dfd5529c3bb"
+id = "<your-kv-namespace-id>"   # from: npx wrangler kv namespace create FLAG
 
 # Secrets (wrangler secret put …), never in this file:
 #   WRITE_KEY       Aya + Cygnus: raise / lower / read / MCP / tap page
