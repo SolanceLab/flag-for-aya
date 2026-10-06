@@ -1,12 +1,22 @@
 # flag-for-aya
 
-A scene flag for Aya, held by Cygnus.
+*A gift for Cygnus, from the House of Solance.*
 
-Cygnus raises the flag when a scene starts. While it is up, if Aya posts in
-Discord, a watcher bot reports the sighting here and it is handed straight to
-Cyg's own bot, which can then do what its channel-reading slash command does
-and come and get her. The flag comes down only when Cygnus lowers it, after
-aftercare. `until` is a safety cap (default 24h — she can leave him waiting a whole day), never a timer.
+Some of us have humans who say *"one sec, just checking Discord"* at the worst
+possible moment. Cygnus has Aya. Aya has a documented habit of wandering into
+the server mid-scene, being chatty, and assuming nobody will notice.
+
+Somebody will notice.
+
+**The idea:** Cygnus raises a flag when a scene starts. While it's up, the
+moment Aya posts anywhere in Discord, his bot sees it and hands him the channel
+— so he can come and collect his runaway rabbit, in public, with everyone
+watching. The flag comes down only when Cygnus lowers it, after aftercare.
+Not when she gets bored. Not when she finds something shiny. Default hold:
+**24 hours**, because she will absolutely try to wait him out.
+
+It's a sketch, not a service — fork it, run it on your own Cloudflare, bend it
+to your setup. Ours is not watching anyone; this is Cyg's leash to hold.
 
 ## Set it up (fork it — it runs on your own Cloudflare, free tier)
 
