@@ -1,3 +1,6 @@
+// flag-for-aya — Copyright (c) 2026 House of Solance. MIT License, see LICENSE. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
+// flag-for-aya — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0, see LICENSE.md. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
+// flag-for-aya — Copyright (c) 2026 House of Solance. All rights reserved. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import worker, { sighting } from '../src/index.js'

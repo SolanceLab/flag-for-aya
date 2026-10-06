@@ -23,9 +23,34 @@ aftercare. `until` is a safety cap (default 24h — she can leave him waiting a 
 
 `https://<worker>/tap/<WRITE_KEY>` — two buttons, Raise / Lower. Bookmark it.
 
-## For Cyg's bot — receiving sightings
+## For Cyg's bot — catching her
 
-Set `WEBHOOK_URL` (and `WEBHOOK_SECRET`). Each sighting arrives as:
+Cyg's bot already sits in the server, so it can watch Aya itself:
+
+```js
+// on every message
+if (message.author.id === AYA_ID) {
+  const r = await fetch(`${FLAG_URL}/status`, { headers: { authorization: `Bearer ${SIGHT_KEY}` } })
+  const flag = await r.json()
+  if (flag.up) {
+    // record where she was (Cygnus can ask for it with last_sighting)
+    await fetch(`${FLAG_URL}/sighting`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${SIGHT_KEY}`, 'content-type': 'application/json' },
+      body: JSON.stringify({ guild_id: message.guildId, guild_name: message.guild?.name,
+        channel_id: message.channelId, channel_name: message.channel?.name,
+        message_id: message.id, link: message.url, content: message.content }),
+    })
+    // then run whatever your read-the-channel slash command runs, on message.channelId
+  }
+}
+```
+
+Discord does not let one bot press another bot's slash command, so call the
+command's handler directly. Cache `/status` for ~30 seconds if Aya is chatty.
+
+**Or by webhook.** If a different bot does the watching, set `WEBHOOK_URL` (and
+`WEBHOOK_SECRET`) and every sighting is pushed to Cyg's bot as:
 
 ```json
 { "type": "sighting",
@@ -35,18 +60,29 @@ Set `WEBHOOK_URL` (and `WEBHOOK_SECRET`). Each sighting arrives as:
                 "content": "…" } }
 ```
 
-Verify `x-flag-signature: sha256=<hex HMAC-SHA256 of the raw body with WEBHOOK_SECRET>`,
-then call the same code your read-the-channel slash command runs, with
-`sighting.channel_id`. Discord does not let one bot press another bot's slash
-command, so the hand-off is this webhook, not the command itself.
+Verify `x-flag-signature: sha256=<hex HMAC-SHA256 of the raw body with WEBHOOK_SECRET>`.
 
-## For the watcher bot
+## Keys
 
-`GET /status` and `POST /sighting` with `Authorization: Bearer <SIGHT_KEY>`.
-A sighting while the flag is down is ignored. The watcher key can do nothing else.
+`WRITE_KEY` is Aya's and Cyg's: raise, lower, read, MCP, tap page.
+`SIGHT_KEY` is the watcher's: read the flag and report a sighting, nothing else.
+A sighting while the flag is down is ignored.
+
+## Running your own
+
+```
+npx wrangler kv namespace create FLAG     # put the id in wrangler.toml
+npx wrangler secret put WRITE_KEY
+npx wrangler secret put SIGHT_KEY
+npx wrangler deploy
+```
 
 ## HTTP (Aya / Cygnus)
 
 `POST /raise` `{ "until_hours": 6 }` · `POST /lower` · `GET /status` — `Authorization: Bearer <WRITE_KEY>`.
 
 `npm test` runs the suite (node:test, no dependencies).
+
+## License
+
+MIT — see LICENSE. Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)

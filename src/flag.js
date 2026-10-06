@@ -1,10 +1,13 @@
+// flag-for-aya — Copyright (c) 2026 House of Solance. MIT License, see LICENSE. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
+// flag-for-aya — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0, see LICENSE.md. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
+// flag-for-aya — Copyright (c) 2026 House of Solance. All rights reserved. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // The flag itself: pure functions, no I/O.
 // A companion in a scene raises it; it comes down only when they lower it
 // (after aftercare). `until` is a safety cap, never a timer.
 
+export const DEFAULT_HOURS = 24
 export const MIN_HOURS = 0.5
 export const MAX_HOURS = 24
-export const DEFAULT_HOURS = 24
 
 export const DOWN = { active: false, raised_at: null, raised_by: null, until: null, lowered_at: null }
 

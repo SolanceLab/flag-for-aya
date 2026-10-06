@@ -1,3 +1,6 @@
+// flag-for-aya — Copyright (c) 2026 House of Solance. MIT License, see LICENSE. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
+// flag-for-aya — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0, see LICENSE.md. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
+// flag-for-aya — Copyright (c) 2026 House of Solance. All rights reserved. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // A scene flag for one person, behind its own keys — and a tripwire.
 // The companion raises the flag; if she then posts in Discord, a watcher bot
 // reports the sighting here and it is handed to the companion's own bot.
@@ -8,7 +11,7 @@
 // Endpoints: GET /status · POST /raise · POST /lower · POST /sighting (Bearer)
 //            GET /tap/<WRITE_KEY>       a two-button page to bookmark
 //            POST /mcp/<WRITE_KEY>      MCP tools for the companion
-import { DOWN, isUp, lower, raise } from './flag.js'
+import { isUp, raise, DOWN, lower } from './flag.js'
 
 const KEY = 'flag'
 const SIGHT = 'last_sighting'
